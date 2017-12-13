@@ -10,7 +10,7 @@ const MostLatest = ({list}) =>(
                     <th>Stt</th>
                     <th>User sent</th>
                     <th>User receive</th>
-                    <th>Transaction volume</th>
+                    <th>Amount</th>
                     <th>Date</th>
                     <th>Description</th>
                 </tr>
