@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 
 const Register = ({history, setFullName, setUserName,
     setPassword, setCofirm, isvalidUsername, 
-    isvalidPassword,isvalidConfirm, isValidForm,
+    isvalidPassword,isvalidConfirm, isValidForm, messageUsername,
     submitForm }) => {
         return(
     <div style={{backgroundColor:'#1A237E', height: 800}}>
@@ -32,7 +32,7 @@ const Register = ({history, setFullName, setUserName,
                             <TextField fullWidth={true} 
                                 onChange={(e) => setFullName(e.target.value)}
                                 floatingLabelText="Enter name"
-                                //errorText={}
+                                
                                 /><br/>
                             <h4 style={{color:'black'}}>Username</h4>
                             <TextField fullWidth={true} 

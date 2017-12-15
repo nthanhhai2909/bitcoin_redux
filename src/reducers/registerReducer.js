@@ -16,6 +16,11 @@ const initialStateIsValid = {
     isValidForm : true, 
 }
 
+const initialStateSubmitForm = {
+    isFetching: false,
+    isRegister: false,
+}
+
 const inputs = (state = initialStateInput, action) =>{
 
     switch(action.type){
@@ -63,8 +68,28 @@ const isValids = (state = initialStateIsValid, action) =>{
     }
 }
 
+const submitForm = (state = initialStateSubmitForm, action) => {
+    switch(action.type){
+        case registerTypes.REGISTER_POST:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+        case registerTypes.REGISTER_FAIL:
+            return Object.assign({}, state, {
+                isRegister: false
+            });
+        case registerTypes.REGISTER_SUCCESS:
+            return Object.assign({}, state,{
+                isRegister: true
+            });
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     inputs,
     isValids,
+    submitForm
     
 })

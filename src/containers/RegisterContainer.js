@@ -5,7 +5,12 @@ import Register from '../components/Register'
 import * as registerActions from '../actions/registerAction'
 import { bindActionCreators } from 'redux';
 
-class RegisterContainer extends React.Component{    
+class RegisterContainer extends React.Component{
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.isRegister){
+            this.props.history.push('/login');
+        }
+    }    
     render(){
         const {actions} = this.props;
         return(
@@ -32,7 +37,8 @@ const mapStateToProps = state => ({
     isvalidUsername: state.registerReducers.isValids.isvalidUsername,
     isvalidPassword: state.registerReducers.isValids.isvalidPassword,
     isvalidConfirm: state.registerReducers.isValids.isvalidConfirm,
-    isValidForm: state.registerReducers.isValids.isValidForm
+    isValidForm: state.registerReducers.isValids.isValidForm,
+    isRegister: state.registerReducers.submitForm.isRegister
 })
 
 const mapDispatchToProps = dispatch =>{
@@ -46,6 +52,8 @@ RegisterContainer.propTypes = {
     isvalidUsername: PropTypes.bool.isRequired,
     isvalidPassword: PropTypes.bool.isRequired,
     isvalidConfirm: PropTypes.bool.isRequired,
+    isValidForm:PropTypes.bool.isRequired,
+    isRegister: PropTypes.bool.isRequired,
 }
 
 export default connect (

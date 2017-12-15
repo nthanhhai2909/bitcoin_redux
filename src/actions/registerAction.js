@@ -1,5 +1,5 @@
 import {registerTypes} from '../constants/actionTypes'
-
+import axios from 'axios'
 export const setFullName = fullname => ({
     type: registerTypes.SET_FULLNAME,
     fullname
@@ -70,8 +70,24 @@ const isValidCofirm = (confirm, password) => {
     return true;
 }
 
-export const submitForm = () => (dispatch, getState) => {
+export const registerPost = () => ({
+    type: registerTypes.REGISTER_POST
+})
 
+export const registerFail = () => ({
+    type: registerTypes.REGISTER_FAIL
+})
+
+export const registerSuccess = () => ({
+    type: registerTypes.REGISTER_SUCCESS
+})
+
+export const registerReveice = (data) => ({
+    type: registerTypes.REGISTER_RECEIVE, 
+    data
+})
+
+const isValidForm = (dispatch, getState) => {
     let count = 0;
     const objInput = getState().registerReducers.inputs;
 
@@ -97,7 +113,6 @@ export const submitForm = () => (dispatch, getState) => {
         count++;
     }
     else{
-        console.log('hihi')
         dispatch(setIsValidPassword(true));
     }
 
@@ -109,14 +124,35 @@ export const submitForm = () => (dispatch, getState) => {
         dispatch(setIsValidConfrim(true));
     }
 
-    if(count > 0){
+    return count;
+}
+
+export const submitForm = () => (dispatch, getState) => {
+    const objInput = getState().registerReducers.inputs;
+
+    if(isValidForm(dispatch, getState) > 0){
         dispatch(setIsValidForm(false));
         return;
     }
-
     dispatch(setIsValidForm(true));
 
-
+    dispatch(registerPost());
+    axios.post('https://tradingbitcoin.herokuapp.com/logup',{
+            fullname: objInput.fullname,
+            username: objInput.username, 
+            password: objInput.password,
+            confirm:  objInput.confirm,
+        })
+        .then((response)=>{
+            if(response.data.status === 'true'){
+                dispatch(registerSuccess());
+            }
+            else{
+                dispatch(registerFail());
+                dispatch(setIsValidUsername(false));
+            }
+        })
+        .catch((err) => dispatch(registerFail()));
 }
 
 
