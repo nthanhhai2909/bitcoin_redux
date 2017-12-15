@@ -1,51 +1,52 @@
 import {registerTypes} from '../constants/actionTypes'
 import axios from 'axios'
 export const setFullName = fullname => ({
-    type: registerTypes.SET_FULLNAME,
+    type: registerTypes.SET_FULLNAME_REGISTER,
     fullname
 })
 
 
 export const setUserName = username => ({
-    type: registerTypes.SET_USERNAME,
+    type: registerTypes.SET_USERNAME_REGISTER,
     username
 })
 
 export const setPassword = password => ({
-    type: registerTypes.SET_PASSWORD,
+    type: registerTypes.SET_PASSWORD_REGISTER,
     password
 })
 
 export const setConfirm = confirm  =>({
-    type: registerTypes.SET_CONFIRM,
+    type: registerTypes.SET_CONFIRM_REGISTER,
     confirm
 })
 
 
-export const setIsValidFullName = status => ({
+export const setIsValidFullName = mstatus => ({
     type: registerTypes.SET_ISVALID_FULLNAME,
-    status
+    mstatus
 })
 
-export const setIsValidUsername = status => ({
+export const setIsValidUsername = mstatus => ({
     type: registerTypes.SET_ISVALID_USERNAME,
-    status
+    mstatus
 })
-export const setIsValidPassword = status => ({
+export const setIsValidPassword = mstatus => ({
     type: registerTypes.SET_ISVALID_PASSWORD,
-    status
+    mstatus
 })
-export const setIsValidConfrim = status => ({
+export const setIsValidConfrim = mstatus => ({
     type: registerTypes.SET_ISVALID_COFIRM,
-    status
+    mstatus
 })
 
-export const setIsValidForm = status => ({
+export const setIsValidForm = mstatus => ({
     type: registerTypes.SET_NOTIFICATION,
-    status
+    mstatus
 })
 
 const isValidFullname = fullname => {
+    console.log('asdasd', fullname)
     if(fullname === ''){return false;}
     return true;
 }
@@ -80,11 +81,6 @@ export const registerFail = () => ({
 
 export const registerSuccess = () => ({
     type: registerTypes.REGISTER_SUCCESS
-})
-
-export const registerReveice = (data) => ({
-    type: registerTypes.REGISTER_RECEIVE, 
-    data
 })
 
 const isValidForm = (dispatch, getState) => {
@@ -158,9 +154,9 @@ export const submitForm = () => (dispatch, getState) => {
         .then((response)=>{
             if(response.data.status === 'true'){
                 dispatch(registerSuccess());
-                dispatch(resetInput());
-                dispatch(resetIsValid());
-                dispatch(resetRegister());
+                // dispatch(resetInput());
+                // dispatch(resetIsValid());
+                // dispatch(resetRegister());
             }
             else{
                 dispatch(registerFail());
