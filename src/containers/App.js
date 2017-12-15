@@ -2,6 +2,7 @@ import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import BlockChainInforContainer from './BlockChainInforContainer'
+import RegisterContainer from '../containers/RegisterContainer'
 import LoginContainer from './LoginContainer'
 import '../css/index.css'
 const App = () => (
@@ -10,6 +11,7 @@ const App = () => (
             <Switch>
                 <Route exact path='/' component={BlockChainInforContainer}/>
                 <Route exact path='/login' component={LoginContainer}/>
+                <Route exact path='/register' component={RegisterContainer}/>
             </Switch>
         </Router>
     </MuiThemeProvider>

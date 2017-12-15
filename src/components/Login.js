@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import {Paper, RaisedButton,TextField  } from 'material-ui';
 import {Navbar, NavItem, NavDropdown, MenuItem, Nav,Row, Col, Grid, Pager, Button } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-const Login = ({message}) => (
+const Login = ({history}) => (
     <div style={{backgroundColor:'#1A237E', height: 800}}>
-        <div></div>
+        
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
                 <Navbar.Brand>
@@ -20,8 +20,8 @@ const Login = ({message}) => (
                 <Col xs={6} md={8}>
                     <Paper  zDepth={3} >
                         <div  className="sign-form">
-                            <h4 style={{textAlign:'center', color:'red'}}>{message}</h4>
-                            <h2 style={{textAlign:'center', color:'#1A237E'}}>#BlockChain</h2>
+                            <h4 style={{textAlign:'center', color:'red'}}>{}</h4>
+                            <h2 style={{textAlign:'center', color:'#1A237E'}}>#Login</h2>
                             <h4 style={{color:'black'}}>Username</h4>
                             <TextField fullWidth={true} 
                                 floatingLabelText="Enter username"/><br/>
@@ -32,7 +32,7 @@ const Login = ({message}) => (
                                  floatingLabelText="Enter password"
                             />
                             <RaisedButton label="Login" primary={true} style={{marginRight:1, marginTop:50}} />
-                            <RaisedButton label="Sign-up" secondary={true} >
+                            <RaisedButton label="Sign-up" secondary={true} onClick={() => history.push('/register')} >
                             </RaisedButton>
                         </div> 
                     </Paper>
