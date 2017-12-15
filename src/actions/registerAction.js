@@ -127,6 +127,18 @@ const isValidForm = (dispatch, getState) => {
     return count;
 }
 
+export const resetInput = () => ({
+    type:registerTypes.RESET_INPUT
+})
+
+export const resetIsValid = () => ({
+    type: registerTypes.RESET_ISVALID
+})
+
+export const resetRegister = () => ({
+    type: registerTypes.RESET_REGISTER,
+})
+
 export const submitForm = () => (dispatch, getState) => {
     const objInput = getState().registerReducers.inputs;
 
@@ -146,6 +158,9 @@ export const submitForm = () => (dispatch, getState) => {
         .then((response)=>{
             if(response.data.status === 'true'){
                 dispatch(registerSuccess());
+                dispatch(resetInput());
+                dispatch(resetIsValid());
+                dispatch(resetRegister());
             }
             else{
                 dispatch(registerFail());

@@ -36,7 +36,8 @@ const inputs = (state = initialStateInput, action) =>{
         case registerTypes.SET_CONFIRM:
             return Object.assign({}, state, 
                 {confirm: action.confirm});
-        
+        case registerTypes.RESET_INPUT:
+            return Object.assign({}, initialStateInput);
         default:
             return state;
     }
@@ -63,6 +64,8 @@ const isValids = (state = initialStateIsValid, action) =>{
             return Object.assign({}, state, {
                 isValidForm: action.status
             });
+        case registerTypes.RESET_ISVALID: 
+            return Object.assign({}, initialStateIsValid);
         default:
             return state;
     }
@@ -82,6 +85,8 @@ const submitForm = (state = initialStateSubmitForm, action) => {
             return Object.assign({}, state,{
                 isRegister: true
             });
+        case registerTypes.RESET_REGISTER:
+            return Object.assign({}, initialStateSubmitForm)
         default:
             return state;
     }

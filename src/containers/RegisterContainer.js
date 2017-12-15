@@ -23,6 +23,7 @@ class RegisterContainer extends React.Component{
                     setCofirm={(value) => actions.setConfirm(value)}
                     submitForm={() => actions.submitForm()}
                     isvalidUsername={this.props.isvalidUsername}
+                    isvalidFullName={this.props.isvalidFullName}
                     isvalidPassword={this.props.isvalidPassword}
                     isvalidConfirm={this.props.isvalidConfirm}
                     isValidForm={this.props.isValidForm}
