@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Paper, RaisedButton,TextField  } from 'material-ui';
 import {Navbar, NavItem, NavDropdown, MenuItem, Nav,Row, Col, Grid, Pager, Button } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-const Login = ({history}) => (
+const Login = ({history, notification, setUsername, setPassword, submitForm}) => (
     <div style={{backgroundColor:'#1A237E', height: 800}}>
         
         <Navbar inverse collapseOnSelect>
@@ -20,18 +20,27 @@ const Login = ({history}) => (
                 <Col xs={6} md={8}>
                     <Paper  zDepth={3} >
                         <div  className="sign-form">
-                            <h4 style={{textAlign:'center', color:'red'}}>{}</h4>
+                            <h4 style={{textAlign:'center', color:'red'}}>{notification ? '' : 'LOGIN FAIL'}</h4>
                             <h2 style={{textAlign:'center', color:'#1A237E'}}>#Login</h2>
                             <h4 style={{color:'black'}}>Username</h4>
-                            <TextField fullWidth={true} 
-                                floatingLabelText="Enter username"/><br/>
+                            <TextField 
+                                fullWidth={true} 
+                                onChange={(e) => setUsername(e.target.value)}
+                                floatingLabelText="Enter username"/>
+                                <br/>
                             <h4 style={{ color:'black', marginTop:20}}>Password</h4>
-                            <TextField inputStyle={true} 
-                                 fullWidth={true} type="password" 
-                           
-                                 floatingLabelText="Enter password"
+                            <TextField
+                                fullWidth={true} 
+                                type="password" 
+                                onChange={(e) => setPassword(e.target.value)}
+                                floatingLabelText="Enter password"
                             />
-                            <RaisedButton label="Login" primary={true} style={{marginRight:1, marginTop:50}} />
+                            <RaisedButton 
+                                label="Login"
+                                primary={true}
+                                style={{marginRight:1, marginTop:50}} 
+                                onClick={() => submitForm()}
+                                />
                             <RaisedButton label="Sign-up" secondary={true} onClick={() => history.push('/register')} >
                             </RaisedButton>
                         </div> 
@@ -47,7 +56,10 @@ const Login = ({history}) => (
 )
 
 Login.propTypes ={
-
+    notification: PropTypes.bool.isRequired,
+    setUsername: PropTypes.func.isRequired, 
+    setPassword: PropTypes.func.isRequired,
+    submitForm:PropTypes.func.isRequired,
 }
 
 export default Login

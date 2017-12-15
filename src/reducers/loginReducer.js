@@ -4,7 +4,7 @@ import { combineReducers } from 'redux'
 const initialStateInput = {
     username: '',
     password: '',
-    notification: false,
+    notification: true,
 }
 
 

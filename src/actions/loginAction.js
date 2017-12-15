@@ -1,5 +1,5 @@
 import {loginTypes} from '../constants/actionTypes'
-
+import axios from 'axios'
 export const setUsername = username => ({
     type: loginTypes.SET_USERNAME_LOGIN, 
     username
@@ -35,3 +35,35 @@ export const resetSubmitFrom = () => ({
     type: loginTypes.RESET_SUBMITFORM_LOGIN
 })
 
+
+export const submitForm = () => (dispatch, getState) => {
+
+    const objInput = getState().loginReducers.inputs;
+    dispatch(loginPost());
+    axios.post('https://tradingbitcoin.herokuapp.com/login',{
+        username: objInput.username, 
+        password: objInput.password
+    })
+    .then((response)=>{
+        console.log(response);
+        if(response.data.status === 'true'){
+            dispatch(loginSuccess());
+            dispatch(setIsValidLogin(true));
+            dispatch(resetInput());
+            
+            // this.props.history.push({
+            //     pathname:"/profile/:user=" + this.state.username,
+            //     state:{isLogin: true}
+            // });
+        }
+        else{
+
+            dispatch(setIsValidLogin(false));
+            dispatch(loginFail());
+        }
+    })
+    .catch((err) => {
+        dispatch(setIsValidLogin(false));
+        dispatch(loginFail());}
+    );
+}
