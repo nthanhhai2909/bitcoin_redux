@@ -2,18 +2,18 @@
 import {registerTypes} from '../constants/actionTypes'
 import { combineReducers } from 'redux'
 const initialStateInput = {
-    fullname: "",
-    username: "",
-    password:"",
-    confirm:"",
-    
+    fullname: '',
+    username: '',
+    password:'',
+    confirm: '',
 }
 
 const initialStateIsValid = {
     isvalidFullName: true,
     isvalidUsername: true,
     isvalidPassword: true,
-    isvalidConfirm: true,
+    isvalidConfirm: true,   
+    isValidForm : true, 
 }
 
 const inputs = (state = initialStateInput, action) =>{
@@ -51,9 +51,13 @@ const isValids = (state = initialStateIsValid, action) =>{
             return Object.assign({}, state,
                  {isvalidPassword: action.status});
         case registerTypes.SET_ISVALID_COFIRM:
-                return Object.assign({}, state, {
+            return Object.assign({}, state, {
                     isvalidConfirm:action.status
                 });
+        case registerTypes.SET_NOTIFICATION:
+            return Object.assign({}, state, {
+                isValidForm: action.status
+            });
         default:
             return state;
     }

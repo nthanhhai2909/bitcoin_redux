@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Table} from 'react-bootstrap'
 const MostLatest = ({list}) =>(
     <div>
-        <div style={{maxHeight:500, overflow:'scroll'}}>
+        <div style={{maxHeight:500, overflowY:'scroll'}}>
             <Table striped bordered condensed hover  >
                 <thead>
                 <tr>

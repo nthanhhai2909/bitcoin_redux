@@ -6,8 +6,10 @@ import {Link} from 'react-router-dom'
 
 
 const Register = ({history, setFullName, setUserName,
-    setPassword, setCofirm,
-    isvalidUsername, isvalidPassword,isvalidConfirm }) => (
+    setPassword, setCofirm, isvalidUsername, 
+    isvalidPassword,isvalidConfirm, isValidForm,
+    submitForm }) => {
+        return(
     <div style={{backgroundColor:'#1A237E', height: 800}}>
     
         <Navbar inverse collapseOnSelect>
@@ -24,7 +26,7 @@ const Register = ({history, setFullName, setUserName,
                 <Col xs={6} md={8}>
                     <Paper  zDepth={3} >
                         <div  className="sign-form">
-                            <h4 style={{textAlign:'center', color:'red'}}>{}</h4>
+                            <h4 style={{textAlign:'center', color:'red'}}>{isValidForm ? '' : 'REGISTER FAIL'}</h4>
                             <h2 style={{textAlign:'center', color:'#1A237E'}}>#Register</h2>
                             <h4 style={{color:'black'}}>Full name</h4>
                             <TextField fullWidth={true} 
@@ -43,16 +45,21 @@ const Register = ({history, setFullName, setUserName,
                                 fullWidth={true} type="password" 
                                 onChange={(e) => setPassword(e.target.value)} 
                                 floatingLabelText="Enter password"
-                                errorText={isvalidPassword ? "" : 'INVALID'}
+                                errorText={isvalidPassword ? '' : 'INVALID'}
                             />
                             <h4 style={{color:'black'}}>Confirm</h4>
                             <TextField inputStyle="password" 
                                 fullWidth={true} type="password"
                                 onChange={(e) => setCofirm(e.target.value)}
                                 floatingLabelText="Enter confirm"
-                                errorText={isvalidConfirm ? "" : 'INVALID'}
+                                errorText={isvalidConfirm ? '': 'INVALID'}
                               /><br/>   
-                            <RaisedButton label="Sign-up " style={{marginRight:1}} primary={true} />
+                            <RaisedButton 
+                                label="Sign-up"
+                                style={{marginRight:1}}
+                                primary={true}
+                                onClick={() => submitForm()}
+                                />
                             <RaisedButton label="Login" secondary={true} onClick={() => history.push('/login')}>
                             </RaisedButton>
                         </div> 
@@ -64,7 +71,8 @@ const Register = ({history, setFullName, setUserName,
 
     </div>
     </div>
-)
+        )
+}
 
 Register.propTypes ={
     setUserName: PropTypes.func.isRequired,
@@ -73,6 +81,8 @@ Register.propTypes ={
     isvalidUsername: PropTypes.bool.isRequired,
     isvalidPassword: PropTypes.bool.isRequired,
     isvalidConfirm: PropTypes.bool.isRequired,   
+    isValidForm: PropTypes.bool.isRequired,
+    submitForm: PropTypes.func.isRequired,
 }
 
 export default Register
