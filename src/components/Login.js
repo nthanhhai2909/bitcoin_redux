@@ -4,7 +4,7 @@ import {Paper, RaisedButton,TextField  } from 'material-ui';
 import {Navbar, NavItem, Nav,Row, Col, Grid} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 const Login = ({history, notification, setUsername, setPassword, submitForm}) => (
-    <div style={{backgroundColor:'#1A237E', height: 800}}>
+    <div style={{backgroundColor:'white', height: 800}}>
         
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
@@ -21,7 +21,7 @@ const Login = ({history, notification, setUsername, setPassword, submitForm}) =>
                     <Paper  zDepth={3} >
                         <div  className="sign-form">
                             <h4 style={{textAlign:'center', color:'red'}}>{notification ? '' : 'LOGIN FAIL'}</h4>
-                            <h2 style={{textAlign:'center', color:'#1A237E'}}>#Login</h2>
+                            <h2 style={{textAlign:'center', color:'white'}}>#Login</h2>
                             <h4 style={{color:'black'}}>Username</h4>
                             <TextField 
                                 fullWidth={true} 

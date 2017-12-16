@@ -10,7 +10,7 @@ const Register = ({history, setFullName, setUserName,
     isvalidPassword, isvalidConfirm, isValidForm, messageUsername,
     submitForm }) => {
         return(
-    <div style={{backgroundColor:'#1A237E', height: 800}}>
+    <div style={{backgroundColor:'white', height: 800}}>
     
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
@@ -27,7 +27,7 @@ const Register = ({history, setFullName, setUserName,
                     <Paper  zDepth={3} >
                         <div  className="sign-form">
                             <h4 style={{textAlign:'center', color:'red'}}>{isValidForm ? '' : 'REGISTER FAIL'}</h4>
-                            <h2 style={{textAlign:'center', color:'#1A237E'}}>#Register</h2>
+                            <h2 style={{textAlign:'center', color:'white'}}>#Register</h2>
                             <h4 style={{color:'black'}}>Full name</h4>
                             <TextField fullWidth={true} 
                                 onChange={(e) => setFullName(e.target.value)}
