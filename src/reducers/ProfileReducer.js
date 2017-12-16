@@ -23,6 +23,27 @@ const initialStateGetTransaction = {
     isGetTransaction: false,
 }
 
+const initialStateSent =  {
+    isShow: false,
+    isWallet: '',
+    amount:'',
+    description:'',
+    myID: '',
+}
+
+const initialStateIsValidSent = {
+    isValidIDWalletSent: true,
+    isValidAmountSent: true, 
+    isVlidDescription: true, 
+    idValidFormSent: true,
+}
+
+const initialStateSubmitFormSent = {
+    isFetching: false,
+    isSent: false,
+}
+
+
 const infor = ( state = initialInfor, action) => {
     switch(action.type){
         case profileTypes.SET_NAME_PROFILE:
@@ -103,10 +124,92 @@ const getTransaction = (state = initialStateGetTransaction, action) => {
     }
 }
 
+const sent = (state = initialStateSent, action) => {
+    switch(action.type){
+        case profileTypes.OPEN_DIALOG_SENT:
+            return Object.assign({}, state, {
+                isShow: true
+            });
+        case profileTypes.CLOSE_DIALOG_SENT:
+            return Object.assign({}, state, {
+                isShow: false
+            });
+        case profileTypes.SET_IDWALLET_SENT:
+            return Object.assign({}, state, {
+                idWallet: action.idWallet
+            });
+        case profileTypes.SET_AMOUNT_SENT:
+            return Object.assign({}, state, {
+                amount: action.amount
+            })
+        case profileTypes.SET_DESCRIPTION:
+            return Object.assign({}, state, {
+                description: action.description
+            });
+        case profileTypes.SET_MYID_SENT:
+            return Object.assign({}, state, {
+                myID: action.myID
+            });
+        case profileTypes.RESET_INPUT_SENT:
+            return Object.assign({}, initialStateSent);
+        default:
+            return state;
+    }
+}
+
+const isValidForm = (state = initialStateIsValidSent, action) => {
+    switch(action.type){
+        case profileTypes.SET_ISVALID_IDWALLET_SENT:
+            return Object.assign({}, state, {
+                isValidIDWalletSent: action.mstatus
+            });
+        case profileTypes.SET_ISVALID_AMOUNT_SENT:
+            return Object.assign({}, state, {
+                isValidAmountSent: action.mstatus
+            });
+        case profileTypes.SET_ISVALID_DESCRIPTION:
+            return Object.assign({}, state, {
+                isVlidDescription: action.mstatus
+            });
+        case profileTypes.SET_ISVALID_FORM_SENT:
+            return Object.assign({}, state, {
+                isValidForm: action.mstatus
+            })
+        case profileTypes.RESET_ISVALID_SENT: 
+            return Object.assign({}, initialStateIsValidSent)
+        default:
+            return state; 
+    }
+}
+const submitForm = (state = initialStateSubmitFormSent, action) => {
+    switch(action.type){
+        case profileTypes.POST_SENT:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+        case profileTypes.SENT_FAIL:
+            return Object.assign({}, state, {
+                isFetching: false,
+                isSent: false
+            });
+        case profileTypes.SENT_SUCCESS:
+            return Object.assign({}, state, {
+                isFetching: true,
+                isSent: true,
+            });
+        case profileTypes.RESET_SUBMIT_FORM_SENT:
+            return Object.assign({}, initialStateSubmitFormSent);
+        default:
+            return state;
+    }
+}
 
 export default combineReducers({
     infor,
     getProfile,
     transactions,
-    getTransaction
+    getTransaction, 
+    sent,
+    isValidForm,
+    submitForm
 })

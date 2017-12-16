@@ -19,12 +19,17 @@ class ProfileContainer extends React.Component {
     }
 
     render(){
-        console.log("asdasd", this.props.transactions)
         return(
             <div>
                 <Profile
                     balance={this.props.balance}
                     transactions={this.props.transactions}
+                    isShow={this.props.isShow}
+                    openDialog={() => this.props.actions.openDialogSent()}
+                    closeDialog={() => this.props.actions.closeDialogSent()}
+                    setIdWalletSent={(value) => this.props.actions.setIdWalletSent(value)}
+                    setAmountSent={(value) => this.props.actions.setAmountSent(value)}
+                    setDescription={(value) => this.props.actions.setDescription(value)}
                 />
             </div>
         )
@@ -35,6 +40,7 @@ const mapStateToProps = state => ({
     isLogin: state.loginReducers.submitForm.isLogin,
     balance: state.ProfileReducers.infor.balance,
     transactions: state.ProfileReducers.transactions.transactions,
+    isShow: state.ProfileReducers.sent.isShow
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -46,6 +52,7 @@ ProfileContainer.propTypes = {
     isLogin: PropTypes.bool,
     balance: PropTypes.string.isRequired,
     transactions: PropTypes.array.isRequired,
+    isShow: PropTypes.bool.isRequired,
 }
 export default connect(
     mapStateToProps,

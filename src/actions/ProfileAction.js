@@ -93,3 +93,64 @@ export const getTransactions = (username) => (dispatch, getState) => {
         })
         .catch((err) => dispatch(getTransactionFail()));
 }
+
+
+export const openDialogSent = () => ({
+    type: profileTypes.OPEN_DIALOG_SENT
+})
+
+export const closeDialogSent = () => ({
+    type: profileTypes.CLOSE_DIALOG_SENT
+})
+
+export const setIdWalletSent = idWallet => ({
+    type: profileTypes.SET_IDWALLET_SENT,
+    idWallet
+})
+
+export const setAmountSent = amount => ({
+    type: profileTypes.SET_AMOUNT_SENT,
+    amount
+})
+
+export const setDescription = description => ({
+    type: profileTypes.SET_DESCRIPTION,
+    description
+})
+
+export const setMyIDSent = myID => ({
+    type: profileTypes.SET_MYID_SENT,
+    myID
+})
+
+export const setIsValidIDWalletSent = mstatus => ({
+    type: profileTypes.SET_ISVALID_IDWALLET_SENT,
+    mstatus
+})
+
+export const setIsValidAmountSent = mstatus => ({
+    type: profileTypes.SET_ISVALID_AMOUNT_SENT, 
+    mstatus
+})
+
+export const setIsValidDescription = mstatus => ({
+    type: profileTypes.SET_ISVALID_DESCRIPTION,
+    mstatus
+})
+
+export const setIsValidFormSent = mstatus => ({
+    type: profileTypes.SET_ISVALID_FORM_SENT,
+    mstatus
+})
+
+export const postSent = () => ({
+    type:profileTypes.POST_SENT
+})
+
+export const sentSuccess = () => ({
+    type: profileTypes.SENT_SUCCESS
+})
+
+export const sentFail = () => ({
+    type: profileTypes.SENT_FAIL
+})

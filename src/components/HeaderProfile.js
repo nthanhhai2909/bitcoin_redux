@@ -9,9 +9,6 @@ const HeaderProfile = ({history}) => (
             <Navbar.Brand>
                 <Link to={'/'} style={{color:'white'}}>BLOCKCHAIN</Link>
             </Navbar.Brand>
-            <Nav>
-                <NavItem ><Link onClick={()=>history.push('/login')}to={'/login'} style={{color:'white'}}>Login</Link></NavItem>
-            </Nav>
         </Navbar.Header>
         <Nav pullRight>
             <NavItem>Logout</NavItem>
