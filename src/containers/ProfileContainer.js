@@ -11,15 +11,20 @@ class ProfileContainer extends React.Component {
         if(!this.props.isLogin){
             this.props.history.push('/login');
         }
+
         let username = this.props.match.params.username.split("=", 2)[1];
         this.props.actions.getProfile(username);
+        this.props.actions.getTransactions(username);
+
     }
 
     render(){
+        console.log("asdasd", this.props.transactions)
         return(
             <div>
                 <Profile
-
+                    balance={this.props.balance}
+                    transactions={this.props.transactions}
                 />
             </div>
         )
@@ -28,6 +33,8 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = state => ({
     isLogin: state.loginReducers.submitForm.isLogin,
+    balance: state.ProfileReducers.infor.balance,
+    transactions: state.ProfileReducers.transactions.transactions,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -37,6 +44,8 @@ const mapDispatchToProps = dispatch => ({
 
 ProfileContainer.propTypes = {
     isLogin: PropTypes.bool,
+    balance: PropTypes.string.isRequired,
+    transactions: PropTypes.array.isRequired,
 }
 export default connect(
     mapStateToProps,

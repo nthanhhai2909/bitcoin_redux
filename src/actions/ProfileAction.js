@@ -58,3 +58,38 @@ export const getProfile = (username) => (dispatch, getState) => {
          .catch((err) => {dispatch(getProfileFail());});
          //------------------------------------------------------------------------------  
 }
+
+
+export const postTransaction = () => ({
+    type: profileTypes.POST_TRANSACTION_PROFILE
+})
+
+export const getTransactionFail = () => ({
+    type: profileTypes.GET_TRANSACTION_FAIL
+})
+
+export const getTransactionSuccess = () => ({
+    type: profileTypes.GET_TRANSACTION_SUCCESS
+})
+
+export const setTransaction = (transactions) => ({
+    type: profileTypes.SET_TRANSACTION_PROFILE, 
+    transactions
+})
+
+export const getTransactions = (username) => (dispatch, getState) => {
+    dispatch(postTransaction());
+    axios.get('https://tradingbitcoin.herokuapp.com/transaction/' + username)
+        .then((response) =>{
+            if(response.data.status === 'true'){
+                dispatch(getTransactionSuccess());
+                console.log('data', response.data.data)
+                dispatch(setTransaction(response.data.data));
+            }
+            else{
+                dispatch(getTransactionFail());
+            }
+            
+        })
+        .catch((err) => dispatch(getTransactionFail()));
+}

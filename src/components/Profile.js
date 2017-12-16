@@ -4,7 +4,7 @@ import Header from './HeaderProfile'
 import ActionHome from 'material-ui/svg-icons/action/home'
 import MostLatest  from './MostLatest'
 import {Grid, Row, Col, Glyphicon, Button} from 'react-bootstrap'
-const Profile = ({}) => (
+const Profile = ({balance, transactions}) => (
     <div>
         <Header/>
         <div>
@@ -22,7 +22,7 @@ const Profile = ({}) => (
                 <Col  xs={8} md={9} style={{backgroundColor: '#FAFAFA'}}>
                     <div>
                         <span style={{ fontSize: 30}}>BE YOUR OWN BANK.</span>
-                        <span style={{float:'right',  fontSize: 20}}>Total Balance</span>
+                        <span style={{float:'right',  fontSize: 20}}>Total Balance: {balance}</span>
                     </div>
                     <div style={{marginTop:20}}>
                         <Button style={{width: 100, marginRight: 10}}>SENT</Button>
@@ -31,7 +31,7 @@ const Profile = ({}) => (
 
                     <div style={{marginTop:20}}>
                         <MostLatest
-                            transactions={[]}
+                            transactions={transactions}
                         />
                     </div>
                 </Col>  
@@ -42,7 +42,8 @@ const Profile = ({}) => (
 )
 
 Profile.PropTypes = {
-
+    balance: PropTypes.string.isRequired,
+    transactions: PropTypes.array.isRequired
 }
 
 export default Profile
