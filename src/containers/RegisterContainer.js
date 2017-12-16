@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types'
 import Register from '../components/Register'
 import * as registerActions from '../actions/registerAction'
-import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux'
 
 class RegisterContainer extends React.Component{
     componentWillReceiveProps(nextProps) {

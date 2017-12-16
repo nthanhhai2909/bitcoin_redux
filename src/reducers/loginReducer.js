@@ -52,7 +52,7 @@ const submitForm = (state = initialStateSubmitForm, action) => {
                 isLogin: true
             });
         case loginTypes.RESET_SUBMITFORM_LOGIN:
-            Object.assign({}, initialStateSubmitForm);
+            return Object.assign({}, initialStateSubmitForm);
         default:
             return state;
     }

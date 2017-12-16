@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import {Paper, RaisedButton,TextField  } from 'material-ui';
-import {Navbar, NavItem, NavDropdown, MenuItem, Nav,Row, Col, Grid, Pager, Button } from 'react-bootstrap'
+import {Navbar, NavItem, Nav,Row, Col, Grid} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 const Login = ({history, notification, setUsername, setPassword, submitForm}) => (
     <div style={{backgroundColor:'#1A237E', height: 800}}>
@@ -61,5 +61,6 @@ Login.propTypes ={
     setPassword: PropTypes.func.isRequired,
     submitForm:PropTypes.func.isRequired,
 }
+
 
 export default Login

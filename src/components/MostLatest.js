@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { element } from 'prop-types';
 import {Table} from 'react-bootstrap'
-const MostLatest = ({list}) =>(
+const MostLatest = ({transactions}) =>(
     <div>
         <div style={{maxHeight:500, overflowY:'scroll'}}>
             <Table striped bordered condensed hover  >
@@ -17,16 +17,19 @@ const MostLatest = ({list}) =>(
                 </thead>
                 <tbody>
                     {   
-                    list.map(e => <tr>
-                        <td>{e}</td>
-                    </tr>)
+                        transactions.map((element, index) => {
+                            return(
+                               <tr>
+                                   <td>{index + 1}</td>
+                                   <td>{element.username_sent}</td>
+                                   <td>{element.username_receive}</td>
+                                   <td>{element.transaction_amount}</td>
+                                   <td>{(new Date(Number(element.date)).toString())}</td>
+                                   <td>{element.description}</td>
+                               </tr>
+                            )
+                        })
                     }
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
                 </tbody>
             </Table>
         </div>
@@ -36,7 +39,7 @@ const MostLatest = ({list}) =>(
 )
 
 MostLatest.propTypes = {
-
+    transactions: PropTypes.array.isRequired
 }
 
 
