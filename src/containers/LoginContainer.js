@@ -2,14 +2,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'; 
 import Login from '../components/Login'
-import Header from '../components/Header'
 import * as loginActions from '../actions/loginAction'
 import { bindActionCreators } from 'redux'
 class LoginContainer extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.isLogin){
-            this.props.history.push('/');
+            this.props.history.push({
+                pathname:"/profile/:user=" + this.props.username,
+            });
+            this.props.actions.resetInput();
         }
     }    
     render(){
@@ -30,7 +32,8 @@ class LoginContainer extends React.Component {
 }
 const mapStateToProps = state => ({
     notification: state.loginReducers.inputs.notification,
-    isLogin: state.loginReducers.submitForm.isLogin
+    isLogin: state.loginReducers.submitForm.isLogin,
+    username: state.loginReducers.inputs.username,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -41,6 +44,7 @@ const mapDispatchToProps = dispatch => ({
 LoginContainer.propTypes = {
     notification: PropTypes.bool.isRequired,
     isLogin: PropTypes.bool.isRequired,
+    username: PropTypes.string.isRequired,
 }
 export default connect(
     mapStateToProps,

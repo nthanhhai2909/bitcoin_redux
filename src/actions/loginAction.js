@@ -49,12 +49,7 @@ export const submitForm = () => (dispatch, getState) => {
         if(response.data.status === 'true'){
             dispatch(loginSuccess());
             dispatch(setIsValidLogin(true));
-            dispatch(resetInput());
             
-            // this.props.history.push({
-            //     pathname:"/profile/:user=" + this.state.username,
-            //     state:{isLogin: true}
-            // });
         }
         else{
 
