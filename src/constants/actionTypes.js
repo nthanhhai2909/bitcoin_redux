@@ -34,6 +34,7 @@ export const blockChaninInforTypes ={
     TRANSACTION_SUCCESS: 'TRANSACTION_SUCCESS',
 }
 
+//hihi
 export const profileTypes = {
     SET_NAME_PROFILE: 'SET_NAME_PROFILE',
     SET_BALANCE: 'SET_BALANCE',
