@@ -165,6 +165,18 @@ export const resetInputSent = () => ({
     type: profileTypes.RESET_INPUT_SENT
 })
 
+export const resetIsValid = () => ({
+    type: profileTypes.RESET_ISVALID_SENT
+})
+
+export const resetSubmitForm = () => ({
+    type:profileTypes.RESET_SUBMIT_FORM_SENT
+})
+
+export const resetInfor = () => ({
+    type: profileTypes.RESET_INFOR_USER
+})
+
 export const logout = () => ({
     type: loginTypes.RESET_SUBMITFORM_LOGIN
 })

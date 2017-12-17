@@ -67,6 +67,8 @@ const infor = ( state = initialInfor, action) => {
             return Object.assign({}, state, {
                 myID: action.myID
             });
+        case profileTypes.RESET_INFOR_USER:
+            return Object.assign({}, initialInfor);
         default: 
             return state;
     }

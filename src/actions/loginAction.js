@@ -38,7 +38,6 @@ export const resetSubmitFrom = () => ({
 
 
 export const submitForm = () => (dispatch, getState) => {
-
     const objInput = getState().loginReducers.inputs;
     dispatch(loginPost());
     axios.post('https://tradingbitcoin.herokuapp.com/login',{

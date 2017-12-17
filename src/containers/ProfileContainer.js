@@ -6,6 +6,15 @@ import {bindActionCreators} from 'redux'
 import * as ProfileActions from '../actions/ProfileAction'
 class ProfileContainer extends React.Component {
 
+    componentWillReceiveProps(nextProps) {
+        if(!nextProps.isLogin){
+            this.props.history.push('/');
+            this.props.actions.resetInputSent();
+            this.props.actions.resetIsValid();
+            this.props.actions.resetSubmitForm();
+            this.props.actions.resetInfor();
+        }
+    } 
     componentDidMount(){
         
         if(!this.props.isLogin){
