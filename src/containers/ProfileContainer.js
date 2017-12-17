@@ -34,6 +34,7 @@ class ProfileContainer extends React.Component {
                     isValidIDWalletSent={this.props.isValidIDWalletSent}
                     isValidAmountSent={this.props.isValidAmountSent}
                     isValidDescription={this.props.isValidDescription}
+                    logout={() => this.props.actions.logout()}
                 />
             </div>
         )

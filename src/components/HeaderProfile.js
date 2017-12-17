@@ -3,7 +3,7 @@ import {Navbar, NavItem, NavDropdown, MenuItem, Nav} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 
-const HeaderProfile = ({history}) => (
+const HeaderProfile = ({history, logout}) => (
     <Navbar inverse collapseOnSelect>
         <Navbar.Header>
             <Navbar.Brand>
@@ -11,7 +11,7 @@ const HeaderProfile = ({history}) => (
             </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight>
-            <NavItem>Logout</NavItem>
+            <NavItem onClick={() => logout()} > Logout</NavItem>
         </Nav>
     </Navbar>
 )

@@ -8,22 +8,32 @@ import DialogSent from './DialogSent'
 const Profile = ({balance, transactions, isShow,
      openDialog, closeDialog, setIdWalletSent,
      setAmountSent, setDescription, handleSent,
-     isValidIDWalletSent,isValidAmountSent, isValidDescription}) => (
+     isValidIDWalletSent,isValidAmountSent, isValidDescription, logout}) => (
     <div>
-        <Header/>
+        <Header
+            logout={() => logout()}/>
         <div>
             <Grid fluid={true} >
                 <Row className='show-grid'>
                 
-                <Col xs={4} md={3} style={{backgroundColor: '#FAFAFA',}}>
+                <Col xs={4} md={3} style={{backgroundColor: '#FAFAFA', height: 800}}>
                     <span style={{fontSize:15}}>
                         <Glyphicon glyph='glyphicon glyphicon-home' style={{marginRight:10}}/>
                         DASHBOARD
                     </span>
                     <br/>
                     <hr style={{color:'red'}}/>
+                    <span style={{fontSize:15}}>
+                        <Glyphicon glyph='glyphicon glyphicon-bitcoin' style={{marginRight:10}}/>
+                        BITCOIN
+                    </span>
+                    <br/>
+                    <span style={{fontSize:15}}>
+                        <Glyphicon glyph='glyphicon glyphicon-user' style={{marginRight:10}}/>
+                        USER
+                    </span>
                 </Col>
-                <Col  xs={8} md={9} style={{backgroundColor: '#FAFAFA'}}>
+                <Col  xs={8} md={9} style={{backgroundColor: '#FAFAFA', height: 800}}>
                     <div>
                         <span style={{ fontSize: 30}}>BE YOUR OWN BANK.</span>
                         <span style={{float:'right',  fontSize: 20}}>Total Balance: {balance}</span>
@@ -74,6 +84,7 @@ Profile.PropTypes = {
     isValidIDWalletSent:  PropTypes.bool.isRequired,
     isValidAmountSent:  PropTypes.bool.isRequired,
     isValidDescription: PropTypes.bool.isRequired,
+    logout: PropTypes.func.isRequired,
 }
 
 export default Profile

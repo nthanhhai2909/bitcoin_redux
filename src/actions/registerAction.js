@@ -154,13 +154,12 @@ export const submitForm = () => (dispatch, getState) => {
         .then((response)=>{
             if(response.data.status === 'true'){
                 dispatch(registerSuccess());
-                // dispatch(resetInput());
-                // dispatch(resetIsValid());
-                // dispatch(resetRegister());
+                dispatch(resetInput());
+                dispatch(resetIsValid());
+                dispatch(resetRegister());
             }
             else{
                 dispatch(registerFail());
-                dispatch(setIsValidUsername(false));
             }
         })
         .catch((err) => dispatch(registerFail()));

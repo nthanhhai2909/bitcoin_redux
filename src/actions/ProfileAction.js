@@ -1,5 +1,7 @@
 import {profileTypes} from '../constants/actionTypes'
 import axios from 'axios'
+import {resetSubmitFrom} from './loginAction'
+import {loginTypes} from '../constants/actionTypes'
 export const setName = name => ({
     type:profileTypes.SET_NAME_PROFILE, 
     name
@@ -163,20 +165,9 @@ export const resetInputSent = () => ({
     type: profileTypes.RESET_INPUT_SENT
 })
 
-// async  function isValidIDWalletSent(idWallet) {
-//     const infor = await axios.get('https://tradingbitcoin.herokuapp.com/user/wallet/' + idWallet);
-  
-//     console.log('hihi', infor);
-//     return infor;
-//     // if(infor.data.data.status === 'true'){
-//     //     if(infor.data.data.length > 0 && (username !== infor.data.data[0].username)){
-            
-//     //         return infor;
-//     //     }
-//     // }
-//     // return false;
-// }
-
+export const logout = () => ({
+    type: loginTypes.RESET_SUBMITFORM_LOGIN
+})
 const isValiAmountSent = (amount) => {
     if(amount.length === 0){
         return false;
@@ -211,7 +202,6 @@ export const handleSent = () => async (dispatch, getState) => {
     let informationSent =  await axios.get('https://tradingbitcoin.herokuapp.com/user/wallet/' 
             + getState().ProfileReducers.sent.idWallet);
 
-    console.log('hihi', informationSent);
     if(informationSent.data.status === 'true'){
         if(informationSent.data.data.length > 0 && 
             getState().ProfileReducers.infor.username !== informationSent.data.data[0].username){
@@ -246,22 +236,24 @@ export const handleSent = () => async (dispatch, getState) => {
     }
     else{dispatch(dispatch(setIsValidFormSent(true)));}
 
-    // Make a tranfer
-    axios.put('https://tradingbitcoin.herokuapp.com/userSendMoney', {
+    
+    await axios.put('https://tradingbitcoin.herokuapp.com/userSendMoney', {
         _id: getState().ProfileReducers.infor.myID,
         tranfer: getState().ProfileReducers.sent.amount,
     })
     .then((response) =>{
         if(response.data.status === 'true'){
             dispatch(setBalance(response.data.balance))
-            console.log('tao chay duoc r nek')
         }
     })
     .catch((err) =>console.log(err));
 
+
+
+    console.log('hihi', informationSent.data.data[0].myID + ' - ' + getState().ProfileReducers.sent.amount )
     // // Make receive tranfer
-    axios.put('https://tradingbitcoin.herokuapp.com/userReceiveMoney', {
-        _id: informationSent.data.data[0].myID,
+    await axios.put('https://tradingbitcoin.herokuapp.com/userReceiveMoney', {
+        _id: informationSent.data.data[0]._id,
         tranfer: getState().ProfileReducers.sent.amount,
     })
     .then((response) =>{
@@ -273,7 +265,7 @@ export const handleSent = () => async (dispatch, getState) => {
     .catch((err) =>console.log(err));
 
     let date = new Date();
-    axios.post('https://tradingbitcoin.herokuapp.com/transaction',{
+    await axios.post('https://tradingbitcoin.herokuapp.com/transaction',{
         username_sent: getState().ProfileReducers.infor.username,
         username_receive: informationSent.data.data[0].username,
         date: date.getTime().toString(),
@@ -288,6 +280,7 @@ export const handleSent = () => async (dispatch, getState) => {
         }
     })
     .catch((err) => console.log(err));
+    dispatch(resetInputSent());
     dispatch(closeDialogSent());
 
 }
