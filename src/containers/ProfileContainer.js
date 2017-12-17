@@ -30,6 +30,10 @@ class ProfileContainer extends React.Component {
                     setIdWalletSent={(value) => this.props.actions.setIdWalletSent(value)}
                     setAmountSent={(value) => this.props.actions.setAmountSent(value)}
                     setDescription={(value) => this.props.actions.setDescription(value)}
+                    handleSent={() => this.props.actions.handleSent()}
+                    isValidIDWalletSent={this.props.isValidIDWalletSent}
+                    isValidAmountSent={this.props.isValidAmountSent}
+                    isValidDescription={this.props.isValidDescription}
                 />
             </div>
         )
@@ -40,7 +44,10 @@ const mapStateToProps = state => ({
     isLogin: state.loginReducers.submitForm.isLogin,
     balance: state.ProfileReducers.infor.balance,
     transactions: state.ProfileReducers.transactions.transactions,
-    isShow: state.ProfileReducers.sent.isShow
+    isShow: state.ProfileReducers.sent.isShow,
+    isValidIDWalletSent:  state.ProfileReducers.isValidForm.isValidIDWalletSent,
+    isValidAmountSent:  state.ProfileReducers.isValidForm.isValidAmountSent,
+    isValidDescription: state.ProfileReducers.isValidForm.isValidDescription
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -53,6 +60,9 @@ ProfileContainer.propTypes = {
     balance: PropTypes.string.isRequired,
     transactions: PropTypes.array.isRequired,
     isShow: PropTypes.bool.isRequired,
+    isValidIDWalletSent:  PropTypes.bool.isRequired,
+    isValidAmountSent:  PropTypes.bool.isRequired,
+    isValidDescription: PropTypes.bool.isRequired,
 }
 export default connect(
     mapStateToProps,

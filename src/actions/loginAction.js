@@ -1,5 +1,6 @@
 import {loginTypes} from '../constants/actionTypes'
 import axios from 'axios'
+
 export const setUsername = username => ({
     type: loginTypes.SET_USERNAME_LOGIN, 
     username

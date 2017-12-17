@@ -6,7 +6,9 @@ import MostLatest  from './MostLatest'
 import {Grid, Row, Col, Glyphicon, Button} from 'react-bootstrap'
 import DialogSent from './DialogSent'
 const Profile = ({balance, transactions, isShow,
-     openDialog, closeDialog, setIdWalletSent,setAmountSent, setDescription}) => (
+     openDialog, closeDialog, setIdWalletSent,
+     setAmountSent, setDescription, handleSent,
+     isValidIDWalletSent,isValidAmountSent, isValidDescription}) => (
     <div>
         <Header/>
         <div>
@@ -39,6 +41,10 @@ const Profile = ({balance, transactions, isShow,
                             setIdWalletSent={(value) => setIdWalletSent(value)}
                             setAmountSent={(value) => setAmountSent(value)}
                             setDescription={(value) => setDescription(value)}
+                            handleSent={() => handleSent()}
+                            isValidIDWalletSent={isValidIDWalletSent}
+                            isValidAmountSent={isValidAmountSent}
+                            isValidDescription={isValidDescription}
                         />
                         
                     </div>
@@ -64,6 +70,10 @@ Profile.PropTypes = {
     setAmountSent:PropTypes.func.isRequired,
     setDescription: PropTypes.func.isRequired,
     setIdWalletSent: PropTypes.func.isRequired,
+    handleSent: PropTypes.func.isRequired,
+    isValidIDWalletSent:  PropTypes.bool.isRequired,
+    isValidAmountSent:  PropTypes.bool.isRequired,
+    isValidDescription: PropTypes.bool.isRequired,
 }
 
 export default Profile

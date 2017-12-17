@@ -25,16 +25,17 @@ const initialStateGetTransaction = {
 
 const initialStateSent =  {
     isShow: false,
-    isWallet: '',
+    idWallet: '',
     amount:'',
     description:'',
     myID: '',
+    username: '',
 }
 
 const initialStateIsValidSent = {
     isValidIDWalletSent: true,
     isValidAmountSent: true, 
-    isVlidDescription: true, 
+    isValidDescription: true, 
     idValidFormSent: true,
 }
 
@@ -150,6 +151,10 @@ const sent = (state = initialStateSent, action) => {
             return Object.assign({}, state, {
                 myID: action.myID
             });
+        case profileTypes.SET_USERNAME_SENT:
+            return Object.assign({}, state, {
+                username: action.username
+            })
         case profileTypes.RESET_INPUT_SENT:
             return Object.assign({}, initialStateSent);
         default:
@@ -169,7 +174,7 @@ const isValidForm = (state = initialStateIsValidSent, action) => {
             });
         case profileTypes.SET_ISVALID_DESCRIPTION:
             return Object.assign({}, state, {
-                isVlidDescription: action.mstatus
+                isValidDescription: action.mstatus
             });
         case profileTypes.SET_ISVALID_FORM_SENT:
             return Object.assign({}, state, {

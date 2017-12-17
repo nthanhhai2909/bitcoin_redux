@@ -5,7 +5,8 @@ import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import { Button } from 'react-bootstrap'
-const DialogSent = ({isShow,closeDialog, setIdWalletSent,setAmountSent, setDescription }) => {
+const DialogSent = ({isShow,closeDialog, setIdWalletSent,setAmountSent,
+     setDescription, handleSent, isValidIDWalletSent,isValidAmountSent, isValidDescription }) => {
     const actions = [
         <FlatButton
           label="Cancel"
@@ -16,7 +17,7 @@ const DialogSent = ({isShow,closeDialog, setIdWalletSent,setAmountSent, setDescr
           label="Submit"
           primary={true}
           keyboardFocused={true}
-          onClick={this.handleClose}
+          onClick={() => handleSent()}
         />,
       ];
       return(
@@ -34,6 +35,7 @@ const DialogSent = ({isShow,closeDialog, setIdWalletSent,setAmountSent, setDescr
                     <TextField
                         onChange={(e) => setIdWalletSent(e.target.value)}
                         fullWidth={true}
+                        errorText={isValidIDWalletSent ? '' : 'INVALID'}
                     />
                     <br/>
                     <br/>
@@ -42,6 +44,7 @@ const DialogSent = ({isShow,closeDialog, setIdWalletSent,setAmountSent, setDescr
                     <TextField
                         onChange={(e) => setAmountSent(e.target.value)}
                         fullWidth={true}
+                        errorText={isValidAmountSent ? '' : 'INVALID'}
                     />
                     <br/>
                     <br/>
@@ -50,6 +53,7 @@ const DialogSent = ({isShow,closeDialog, setIdWalletSent,setAmountSent, setDescr
                     <TextField
                         onChange={(e) => setDescription(e.target.value)}
                         fullWidth={true}
+                        errorText={isValidDescription ? '' : 'INVALID'}
                     />
                     <br/>
                 </div>
@@ -64,6 +68,10 @@ DialogSent.propTypes = {
     setAmountSent:PropTypes.func.isRequired,
     setDescription: PropTypes.func.isRequired,
     setIdWalletSent: PropTypes.func.isRequired,
+    handleSent: PropTypes.func.isRequired,
+    isValidIDWalletSent:  PropTypes.bool.isRequired,
+    isValidAmountSent:  PropTypes.bool.isRequired,
+    isValidDescription: PropTypes.bool.isRequired,
 }
 
 export default DialogSent
