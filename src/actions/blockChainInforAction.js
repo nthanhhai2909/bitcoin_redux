@@ -20,7 +20,7 @@ export const transactionSuccess = () => ({
 export const loadForm = () => (dispatch, getState) => {
 
     dispatch(postTransaction());
-    axios.get('https://tradingbitcoin.herokuapp.com/transaction')
+    axios.get('https://server-bitcoin-redux-nthanhhai.herokuapp.com/transaction')
         .then((response) =>{
             if(response.data.status === 'true'){
                 dispatch(transactionSuccess());

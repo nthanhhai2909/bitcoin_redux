@@ -12,7 +12,7 @@ class ProfileContainer extends React.Component {
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:3000/authentication')
+        axios.get('https://server-bitcoin-redux-nthanhhai.herokuapp.com/authentication')
         .then((response) => {
             if(response.data.status === 'true'){
                 let username = this.props.match.params.username.split("=", 2)[1];
@@ -26,7 +26,7 @@ class ProfileContainer extends React.Component {
     }
 
     logout(){
-        axios.get('http://localhost:3000/logout')
+        axios.get('https://server-bitcoin-redux-nthanhhai.herokuapp.com/logout')
         this.props.history.push('/');
     }
 

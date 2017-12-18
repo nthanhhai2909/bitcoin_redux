@@ -145,7 +145,7 @@ export const submitForm = () => (dispatch, getState) => {
     dispatch(setIsValidForm(true));
 
     dispatch(registerPost());
-    axios.post('https://tradingbitcoin.herokuapp.com/logup',{
+    axios.post('https://server-bitcoin-redux-nthanhhai.herokuapp.com/logup',{
             fullname: objInput.fullname,
             username: objInput.username, 
             password: objInput.password,

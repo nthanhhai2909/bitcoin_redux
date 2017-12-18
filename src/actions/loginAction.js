@@ -41,7 +41,7 @@ axios.defaults.withCredentials = true;
 export const submitForm = () => (dispatch, getState) => {
     const objInput = getState().loginReducers.inputs;
     dispatch(loginPost());
-    axios.post('http://localhost:3000/login',{
+    axios.post('https://server-bitcoin-redux-nthanhhai.herokuapp.com/login',{
         username: objInput.username, 
         password: objInput.password
     })

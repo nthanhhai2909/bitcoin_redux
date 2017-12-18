@@ -210,7 +210,7 @@ const isValidDescription = (description) => {
 export const handleSent = () => async (dispatch, getState) => {
 
     let count = 0
-    let informationSent =  await axios.get('http://localhost:3000/user/wallet/' 
+    let informationSent =  await axios.get('https://server-bitcoin-redux-nthanhhai.herokuapp.com/user/wallet/' 
             + getState().ProfileReducers.sent.idWallet);
 
     if(informationSent.data.status === 'true'){
@@ -248,7 +248,7 @@ export const handleSent = () => async (dispatch, getState) => {
     else{dispatch(dispatch(setIsValidFormSent(true)));}
 
     
-    await axios.put('http://localhost:3000/userSendMoney', {
+    await axios.put('https://server-bitcoin-redux-nthanhhai.herokuapp.com/userSendMoney', {
         _id: getState().ProfileReducers.infor.myID,
         tranfer: getState().ProfileReducers.sent.amount,
     })
@@ -260,7 +260,7 @@ export const handleSent = () => async (dispatch, getState) => {
     .catch((err) =>console.log(err));
 
     // // Make receive tranfer
-    await axios.put('http://localhost:3000/userReceiveMoney', {
+    await axios.put('https://server-bitcoin-redux-nthanhhai.herokuapp.com/userReceiveMoney', {
         _id: informationSent.data.data[0]._id,
         tranfer: getState().ProfileReducers.sent.amount,
     })
@@ -273,7 +273,7 @@ export const handleSent = () => async (dispatch, getState) => {
     .catch((err) =>console.log(err));
 
     let date = new Date();
-    await axios.post('http://localhost:3000/transaction',{
+    await axios.post('https://server-bitcoin-redux-nthanhhai.herokuapp.com/transaction',{
         username_sent: getState().ProfileReducers.infor.username,
         username_receive: informationSent.data.data[0].username,
         date: date.getTime().toString(),
