@@ -6,11 +6,6 @@ import {bindActionCreators} from 'redux'
 import * as ProfileActions from '../actions/ProfileAction'
 import axios from 'axios'
 class ProfileContainer extends React.Component {
-    componentWillReceiveProps(nextProps){
-        if(nextProps.isLogout){
-            this.props.history.push('/login');
-        }
-    }
     componentDidMount(){
         axios.get('https://server-bitcoin-redux-nthanhhai.herokuapp.com/authentication')
         .then((response) => {
@@ -27,6 +22,7 @@ class ProfileContainer extends React.Component {
 
     logout(){
         axios.get('https://server-bitcoin-redux-nthanhhai.herokuapp.com/logout')
+        this.props.actions.resetInfor();
         this.props.history.push('/');
     }
 
