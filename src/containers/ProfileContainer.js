@@ -4,27 +4,30 @@ import PropTypes from 'prop-types'
 import Profile from '../components/Profile'
 import {bindActionCreators} from 'redux'
 import * as ProfileActions from '../actions/ProfileAction'
+import axios from 'axios'
 class ProfileContainer extends React.Component {
-
-    componentWillReceiveProps(nextProps) {
-        if(!nextProps.isLogin){
-            this.props.history.push('/');
-            this.props.actions.resetInputSent();
-            this.props.actions.resetIsValid();
-            this.props.actions.resetSubmitForm();
-            this.props.actions.resetInfor();
-        }
-    } 
-    componentDidMount(){
-        
-        if(!this.props.isLogin){
+    componentWillReceiveProps(nextProps){
+        if(nextProps.isLogout){
             this.props.history.push('/login');
         }
+    }
+    componentDidMount(){
+        axios.get('http://localhost:3000/authentication')
+        .then((response) => {
+            if(response.data.status === 'true'){
+                let username = this.props.match.params.username.split("=", 2)[1];
+                this.props.actions.getProfile(username);
+                this.props.actions.getTransactions(username);
+            }
+            else{
+                this.props.history.push('/login');
+            }
+        })
+    }
 
-        let username = this.props.match.params.username.split("=", 2)[1];
-        this.props.actions.getProfile(username);
-        this.props.actions.getTransactions(username);
-
+    logout(){
+        axios.get('http://localhost:3000/logout')
+        this.props.history.push('/');
     }
 
     render(){
@@ -43,7 +46,7 @@ class ProfileContainer extends React.Component {
                     isValidIDWalletSent={this.props.isValidIDWalletSent}
                     isValidAmountSent={this.props.isValidAmountSent}
                     isValidDescription={this.props.isValidDescription}
-                    logout={() => this.props.actions.logout()}
+                    logout={() => this.logout()}
                 />
             </div>
         )
@@ -51,8 +54,8 @@ class ProfileContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    isLogin: state.loginReducers.submitForm.isLogin,
     balance: state.ProfileReducers.infor.balance,
+    isLogout: state.ProfileReducers.infor.isLogout,
     transactions: state.ProfileReducers.transactions.transactions,
     isShow: state.ProfileReducers.sent.isShow,
     isValidIDWalletSent:  state.ProfileReducers.isValidForm.isValidIDWalletSent,
@@ -66,7 +69,7 @@ const mapDispatchToProps = dispatch => ({
 
 
 ProfileContainer.propTypes = {
-    isLogin: PropTypes.bool,
+    isLogout: PropTypes.bool,
     balance: PropTypes.string.isRequired,
     transactions: PropTypes.array.isRequired,
     isShow: PropTypes.bool.isRequired,

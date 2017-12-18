@@ -42,10 +42,9 @@ export const getProfileSuccess = () => ({
 export const getProfile = (username) => (dispatch, getState) => {
 
     dispatch(postProfile());
-    axios.get('https://tradingbitcoin.herokuapp.com/user/' + username)
+    axios.get('http://localhost:3000/user/' + username)
          .then((response)=>{
              if(response.data.status === 'true'){
-            
                     dispatch(setName(response.data.data[0].fullname));
                     dispatch(setBalance(response.data.data[0].balance));
                     dispatch(setIdWallet(response.data.data[0].idWallet));
@@ -81,11 +80,10 @@ export const setTransaction = (transactions) => ({
 
 export const getTransactions = (username) => (dispatch, getState) => {
     dispatch(postTransaction());
-    axios.get('https://tradingbitcoin.herokuapp.com/transaction/' + username)
+    axios.get('http://localhost:3000/transaction/' + username)
         .then((response) =>{
             if(response.data.status === 'true'){
                 dispatch(getTransactionSuccess());
-                console.log('data', response.data.data)
                 dispatch(setTransaction(response.data.data));
             }
             else{
@@ -176,10 +174,11 @@ export const resetSubmitForm = () => ({
 export const resetInfor = () => ({
     type: profileTypes.RESET_INFOR_USER
 })
-
-export const logout = () => ({
-    type: loginTypes.RESET_SUBMITFORM_LOGIN
+export const setLogout = () => ({
+    type: profileTypes.LOGOUT
 })
+
+
 const isValiAmountSent = (amount) => {
     if(amount.length === 0){
         return false;
@@ -211,7 +210,7 @@ const isValidDescription = (description) => {
 export const handleSent = () => async (dispatch, getState) => {
 
     let count = 0
-    let informationSent =  await axios.get('https://tradingbitcoin.herokuapp.com/user/wallet/' 
+    let informationSent =  await axios.get('http://localhost:3000/user/wallet/' 
             + getState().ProfileReducers.sent.idWallet);
 
     if(informationSent.data.status === 'true'){
@@ -249,7 +248,7 @@ export const handleSent = () => async (dispatch, getState) => {
     else{dispatch(dispatch(setIsValidFormSent(true)));}
 
     
-    await axios.put('https://tradingbitcoin.herokuapp.com/userSendMoney', {
+    await axios.put('http://localhost:3000/userSendMoney', {
         _id: getState().ProfileReducers.infor.myID,
         tranfer: getState().ProfileReducers.sent.amount,
     })
@@ -260,11 +259,8 @@ export const handleSent = () => async (dispatch, getState) => {
     })
     .catch((err) =>console.log(err));
 
-
-
-    console.log('hihi', informationSent.data.data[0].myID + ' - ' + getState().ProfileReducers.sent.amount )
     // // Make receive tranfer
-    await axios.put('https://tradingbitcoin.herokuapp.com/userReceiveMoney', {
+    await axios.put('http://localhost:3000/userReceiveMoney', {
         _id: informationSent.data.data[0]._id,
         tranfer: getState().ProfileReducers.sent.amount,
     })
@@ -277,7 +273,7 @@ export const handleSent = () => async (dispatch, getState) => {
     .catch((err) =>console.log(err));
 
     let date = new Date();
-    await axios.post('https://tradingbitcoin.herokuapp.com/transaction',{
+    await axios.post('http://localhost:3000/transaction',{
         username_sent: getState().ProfileReducers.infor.username,
         username_receive: informationSent.data.data[0].username,
         date: date.getTime().toString(),

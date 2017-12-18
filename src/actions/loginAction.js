@@ -6,6 +6,7 @@ export const setUsername = username => ({
     username
 })
 
+
 export const setPassword = password => ({
     type: loginTypes.SET_PASSWORD_LOGIN,
     password
@@ -36,11 +37,11 @@ export const resetSubmitFrom = () => ({
     type: loginTypes.RESET_SUBMITFORM_LOGIN
 })
 
-
+axios.defaults.withCredentials = true;
 export const submitForm = () => (dispatch, getState) => {
     const objInput = getState().loginReducers.inputs;
     dispatch(loginPost());
-    axios.post('https://tradingbitcoin.herokuapp.com/login',{
+    axios.post('http://localhost:3000/login',{
         username: objInput.username, 
         password: objInput.password
     })
@@ -49,10 +50,8 @@ export const submitForm = () => (dispatch, getState) => {
         if(response.data.status === 'true'){
             dispatch(loginSuccess());
             dispatch(setIsValidLogin(true));
-            
         }
         else{
-
             dispatch(setIsValidLogin(false));
             dispatch(loginFail());
         }

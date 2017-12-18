@@ -7,6 +7,7 @@ const initialInfor = {
     balance: '',
     idWallet: '',
     myID: '',
+    isLogout: false,
 }
 
 const initialStateGetPropfile = {
@@ -69,6 +70,10 @@ const infor = ( state = initialInfor, action) => {
             });
         case profileTypes.RESET_INFOR_USER:
             return Object.assign({}, initialInfor);
+        
+        case profileTypes.LOGOUT:
+            return Object.assign({}, state, {isLogout: true})
+
         default: 
             return state;
     }
