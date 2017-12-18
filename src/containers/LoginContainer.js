@@ -12,6 +12,7 @@ class LoginContainer extends React.Component {
                 pathname:"/profile/:user=" + this.props.username,
             });
             this.props.actions.resetInput();
+            this.props.actions.resetSubmitFrom();
         }
     }    
     render(){
