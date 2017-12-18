@@ -42,7 +42,7 @@ export const getProfileSuccess = () => ({
 export const getProfile = (username) => (dispatch, getState) => {
 
     dispatch(postProfile());
-    axios.get('http://localhost:3000/user/' + username)
+    axios.get('https://server-bitcoin-redux-nthanhhai.herokuapp.com/user/' + username)
          .then((response)=>{
              if(response.data.status === 'true'){
                     dispatch(setName(response.data.data[0].fullname));
@@ -80,7 +80,7 @@ export const setTransaction = (transactions) => ({
 
 export const getTransactions = (username) => (dispatch, getState) => {
     dispatch(postTransaction());
-    axios.get('http://localhost:3000/transaction/' + username)
+    axios.get('https://server-bitcoin-redux-nthanhhai.herokuapp.com/transaction/' + username)
         .then((response) =>{
             if(response.data.status === 'true'){
                 dispatch(getTransactionSuccess());
